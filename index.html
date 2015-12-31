@@ -14,7 +14,7 @@
     </head>
     <body ng-app="app" >
 
-        <a href="home.html">GO</a>
+        <!--<a href="home.html">GO</a>-->
 
 <div ngsf-fullscreen>
     <div id='sign-intro' show-if-fullscreen=false>
@@ -31,7 +31,7 @@
         <button ngsf-toggle-fullscreen ng-click=''>Enter signature now</button>
     </div>
     <div id='sign-perform' show-if-fullscreen=true>
-        <p>Please sign below, then press enter or click <button ngsf-toggle-fullscreen ng-click=''>Finished</button></p>
+        <p>Please sign below, then press enter or click <button ngsf-toggle-fullscreen onClick='javascript:doIt();'>Finished</button></p>
         <!--[if lt IE 9]-->
 	<script type="text/javascript" src="assets/flashcanvas.js"></script>
 	<!--[endif]-->
@@ -42,6 +42,39 @@
 	        $("#signature").jSignature()
 	    })
 	</script>
+    </div>
+    <div id='sign-gallery' show-if-fullscreen=false hidden="true">
+        <p>Do you want to use this signature, or try again?</p>
+        <div id="tools"></div>
+        <div><div id="displayarea"></div></div>
+        <a href='index.html'>Try Again</a><button>Use this Signature</button>
+        <script>
+            function doIt() {
+                console.log("DO IT!!!!");
+            var $sigdiv = $("#signature");
+                    //$sigdiv.jSignature() // inits the jSignature widget.
+                    // after some doodling...
+                    //$sigdiv.jSignature("reset") // clears the canvas and rerenders the decor on it.
+
+                    // Getting signature as SVG and rendering the SVG within the browser. 
+                    // (!!! inline SVG rendering from IMG element does not work in all browsers !!!)
+                    // this export plugin returns an array of [mimetype, base64-encoded string of SVG of the signature strokes]
+                    var datapair = $sigdiv.jSignature("getData", "svgbase64") ;
+                    var i = new Image();
+                    i.src = "data:" + datapair[0] + "," + datapair[1] ;
+                    $(i).appendTo($("#displayarea")); // append the image (SVG) to DOM.
+                    
+                    $("#sign-intro").hide();
+                    $("#sign-gallery").show();
+
+                    // Getting signature as "base30" data pair
+                    // array of [mimetype, string of jSIgnature"s custom Base30-compressed format]
+                    //datapair = $sigdiv.jSignature("getData","base30") 
+                    // reimporting the data into jSignature.
+                    // import plugins understand data-url-formatted strings like "data:mime;encoding,data"
+                    //$sigdiv.jSignature("setData", "data:" + datapair.join(",")) 
+                }
+        </script>
     </div>
     
 
@@ -55,7 +88,6 @@
     </div>-->
 end
 </div>
-    Hello
 
 <!--    <page>
 
