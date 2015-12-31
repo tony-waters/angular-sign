@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="assets/jquery.js"></script>
+        <script src="assets/angular.js"></script>
+        <script src="assets/screenfull.js"></script>
+        
+         <script src="http://hrajchert.github.io/angular-screenfull/js/angular-animate.min.js"></script>
+        <script src="http://hrajchert.github.io/angular-screenfull/js/marked.js"></script>
+        
+        <link rel="stylesheet" href="assets/bootstrap.css">
+        <link rel="stylesheet" href="assets/app.css">
+        
+    </head>
+    <body ng-app="app" >
+
+        <a href="home.html">GO</a>
+
+<div ngsf-fullscreen>
+    <p>Summit here</p>
+    <button ngsf-toggle-fullscreen>Toggle fullscreen</button>
+    
+        <!--[if lt IE 9]-->
+	<script type="text/javascript" src="libs/flashcanvas.js"></script>
+	<!--[endif]-->
+	<script src="assets/jSignature.min.js"></script>
+	<div id="signature" style="height: 600px;"></div>
+	<script>
+	    $(document).ready(function() {
+	        $("#signature").jSignature()
+	    })
+	</script>
+        
+<!--    <div id="content">
+            <div id="signatureparent">
+                    <div>jSignature inherits colors from parent element. Text = Pen color. Background = Background. (This works even when Flash-based Canvas emulation is used.)</div>
+                    <div id="signature"></div></div>
+            <div id="tools"></div>
+            <div><p>Display Area:</p><div id="displayarea"></div></div>
+    </div>-->
+end
+</div>
+    Hello
+
+<!--    <page>
+
+        <div layout="page-header" class="myclass">
+            <h1>Monthly Message System</h1>
+        </div>
+
+        <div layout="page-header">
+            <panel heading="Add Alert">
+                <alert-add current-month="{{page.lastSelectedMonth}}"></alert-add>
+            </panel>
+        </div>
+
+        <div layout="page-sidebar">
+            multi: {{page.multiMode}}
+            <panel heading="Month picker">
+                <month-picker 
+                    multi="{{page.multiMode}}"
+                    selected="page.selectedMonths"
+                    last-selected="page.setLastSelectedMonth(month)">
+                </month-picker>
+                <input type="checkbox" ng-model="page.multiMode"/> multi mode
+            </panel>
+        </div>
+
+        <div layout="page-main">
+            <panel heading="Alerts">
+                <alert-list months="page.selectedMonths"></alert-list>
+            </panel>
+        </div>
+
+    </page>-->
+
+    
+    <script src="angular-screenfull.js"></script>
+    <script src="monthPicker.js"></script>
+    <script src="page.js"></script>
+    <script src="panel.js"></script>
+    <script src="alertList.js"></script>
+    <script src="alertAdd.js"></script>
+    <script src="pageController.js"></script>
+    <script src="alertService.js"></script>
+    <script src="app.module.js"></script>
+    <!--<![endif]-->
+</body>
+</html>
