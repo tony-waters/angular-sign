@@ -17,7 +17,9 @@
         <!--<a href="home.html">GO</a>-->
 
 <div>
-    <div id='sign-intro' show-if-fullscreen=false>
+    
+    <div id='sign-intro'>
+        <button onClick="javascript:stage1();">Try without fullscreen</button>
         <p>You now need to provide us with your signature using the graphic tablet and pen provided:</p>
         <p>When you click the 'Do Signature' button below the screen will ...</p>
         <p>Tips:</p>
@@ -30,7 +32,7 @@
         <p>Click the button below when you are ready to sign.</p>
         <button ngsf-toggle-fullscreen ng-click='' onClick="javascript:stage2();">Enter signature now</button>
     </div>
-    <div id='sign-perform' show-if-fullscreen=true hidden="true">
+    <div id='sign-perform'>
         <p>Please sign below, then press enter or click <button ngsf-toggle-fullscreen onClick='javascript:doIt();'>Finished</button></p>
         <!--[if lt IE 9]-->
 	<script type="text/javascript" src="assets/flashcanvas.js"></script>
@@ -43,21 +45,26 @@
 	    })
 	</script>
     </div>
-    <div id='sign-gallery' show-if-fullscreen=false hidden="true">
+    <div id='sign-gallery'>
         <p>Do you want to use this signature, or try again?</p>
         <div id="tools"></div>
         <div><div id="displayarea"></div></div>
-        <a href='index.html'>Try Again</a><button>Use this Signature</button>
+        <a href='index2.html'>Try Again</a><button>Use this Signature</button>
         <script>
+            function stage1() {
+                    $("#sign-intro").show();
+                    $("#sign-perform").hide();
+                    $("#sign-gallery").hide();
+            }
             function stage2() {
                     $("#sign-intro").hide();
                     $("#sign-perform").show();
                     $("#sign-gallery").hide();
             }
             function stage3() {
-                    $("#sign-intro").hide();
-                    $("#sign-perform").hide();
-                    $("#sign-gallery").show();
+//                    $("#sign-intro").hide();
+//                    $("#sign-perform").hide();
+//                    $("#sign-gallery").show();
             }
             function doIt() {
             console.log("DO IT!!!!");
@@ -87,7 +94,11 @@
                 }
         </script>
     </div>
-    
+    <script>
+//                    $("#sign-intro").show();
+//                    $("#sign-perform").hide();
+//                    $("#sign-gallery").hide();
+    </script>
 
         
 <!--    <div id="content">
@@ -97,6 +108,7 @@
             <div id="tools"></div>
             <div><p>Display Area:</p><div id="displayarea"></div></div>
     </div>-->
+
 end
 </div>
 
