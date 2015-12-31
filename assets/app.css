@@ -14,6 +14,10 @@ canvas {
 
 canvas.jSignature { height: 1000px; }
 
+#sign-perform {
+    cursor: crosshair;
+}
+
 #displayarea.img {
     width: 100px !important;
 }
