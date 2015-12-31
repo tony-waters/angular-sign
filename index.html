@@ -17,19 +17,34 @@
         <a href="home.html">GO</a>
 
 <div ngsf-fullscreen>
-    <p>Summit here</p>
-    <button ngsf-toggle-fullscreen>Toggle fullscreen</button>
-    
+    <div id='sign-intro' show-if-fullscreen=false>
+        <p>You now need to provide us with your signature using the graphic tablet and pen provided:</p>
+        <p>When you click the 'Do Signature' button below the screen will ...</p>
+        <p>Tips:</p>
+        <ul>
+            <li>Hold the pen slightly above the tablet before signing</li>
+            <li>You may find it easier to just look at the pad when signing</li>
+            <li>You will be given as many tries as you need</li>
+            <li>When you have finished signing, press the ENTER key on your keyboard</li>
+        </ul>
+        <p>Click the button below when you are ready to sign.</p>
+        <button ngsf-toggle-fullscreen ng-click=''>Enter signature now</button>
+    </div>
+    <div id='sign-perform' show-if-fullscreen=true>
+        <p>Please sign below, then press enter or click <button ngsf-toggle-fullscreen ng-click=''>Finished</button></p>
         <!--[if lt IE 9]-->
-	<script type="text/javascript" src="libs/flashcanvas.js"></script>
+	<script type="text/javascript" src="assets/flashcanvas.js"></script>
 	<!--[endif]-->
 	<script src="assets/jSignature.min.js"></script>
-	<div id="signature" style="height: 600px;"></div>
+	<div id="signature"></div>
 	<script>
 	    $(document).ready(function() {
 	        $("#signature").jSignature()
 	    })
 	</script>
+    </div>
+    
+
         
 <!--    <div id="content">
             <div id="signatureparent">
