@@ -5,8 +5,8 @@
         <script src="assets/angular.js"></script>
         <script src="assets/screenfull.js"></script>
         
-<!--         <script src="http://hrajchert.github.io/angular-screenfull/js/angular-animate.min.js"></script>
-        <script src="http://hrajchert.github.io/angular-screenfull/js/marked.js"></script>-->
+         <script src="http://hrajchert.github.io/angular-screenfull/js/angular-animate.min.js"></script>
+        <script src="http://hrajchert.github.io/angular-screenfull/js/marked.js"></script>
         
         <link rel="stylesheet" href="assets/bootstrap.css">
         <link rel="stylesheet" href="assets/app.css">
@@ -16,11 +16,9 @@
 
         <!--<a href="home.html">GO</a>-->
 
-<div>
-    
-    <div id='sign-intro'>
+<div ngsf-fullscreen>
+    <div id='sign-intro' show-if-fullscreen=false>
         <a href="index.html">Back to Demo options</a>
-        <button onClick="javascript:stage1();">Click me to start demo (no full screen)</button>
         <p>You now need to provide us with your signature using the graphic tablet and pen provided:</p>
         <p>When you click the 'Do Signature' button below the screen will ...</p>
         <p>Tips:</p>
@@ -31,9 +29,9 @@
             <li>When you have finished signing, press the ENTER key on your keyboard</li>
         </ul>
         <p>Click the button below when you are ready to sign.</p>
-        <button ngsf-toggle-fullscreen ng-click='' onClick="javascript:stage2();">Enter signature now</button>
+        <button ngsf-toggle-fullscreen ng-click=''>Enter signature now</button>
     </div>
-    <div id='sign-perform' >
+    <div id='sign-perform' show-if-fullscreen=true>
         <p>Please sign below, then press enter or click <button ngsf-toggle-fullscreen onClick='javascript:doIt();'>Finished</button></p>
         <!--[if lt IE 9]-->
 	<script type="text/javascript" src="assets/flashcanvas.js"></script>
@@ -46,29 +44,14 @@
 	    })
 	</script>
     </div>
-    <div id='sign-gallery'>
+    <div id='sign-gallery' show-if-fullscreen=false hidden="true">
         <p>Do you want to use this signature, or try again?</p>
         <div id="tools"></div>
         <div><div id="displayarea"></div></div>
-        <a href='index2.html'>Try Again</a><button>Use this Signature</button>
+        <a href='index1.html'>Try Again</a><button>Use this Signature</button>
         <script>
-            function stage1() {
-                    $("#sign-intro").show();
-                    $("#sign-perform").hide();
-                    $("#sign-gallery").hide();
-            }
-            function stage2() {
-                    $("#sign-intro").hide();
-                    $("#sign-perform").show();
-                    $("#sign-gallery").hide();
-            }
-            function stage3() {
-//                    $("#sign-intro").hide();
-//                    $("#sign-perform").hide();
-//                    $("#sign-gallery").show();
-            }
             function doIt() {
-            console.log("DO IT!!!!");
+                console.log("DO IT!!!!");
             var $sigdiv = $("#signature");
                     //$sigdiv.jSignature() // inits the jSignature widget.
                     // after some doodling...
@@ -83,7 +66,6 @@
                     $(i).appendTo($("#displayarea")); // append the image (SVG) to DOM.
                     
                     $("#sign-intro").hide();
-                    $("#sign-perform").hide();
                     $("#sign-gallery").show();
 
                     // Getting signature as "base30" data pair
@@ -95,11 +77,7 @@
                 }
         </script>
     </div>
-    <script>
-//                    $("#sign-intro").show();
-//                    $("#sign-perform").hide();
-//                    $("#sign-gallery").hide();
-    </script>
+    
 
         
 <!--    <div id="content">
@@ -109,7 +87,6 @@
             <div id="tools"></div>
             <div><p>Display Area:</p><div id="displayarea"></div></div>
     </div>-->
-
 
 </div>
 
@@ -156,9 +133,5 @@
     <script src="alertService.js"></script>
     <script src="app.module.js"></script>
     <!--<![endif]-->
-    
-    <script>
-//        stage1();
-    </script>
 </body>
 </html>
