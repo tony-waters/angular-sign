@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="assets/jquery.js"></script>
+        <script src="assets/angular.js"></script>
+        <script src="assets/screenfull.js"></script>
+        
+         <script src="http://hrajchert.github.io/angular-screenfull/js/angular-animate.min.js"></script>
+        <script src="http://hrajchert.github.io/angular-screenfull/js/marked.js"></script>
+        
+        <link rel="stylesheet" href="assets/bootstrap.css">
+        <link rel="stylesheet" href="assets/app.css">
+        
+    </head>
+    <body ng-app="app" >
+
+        <!--<a href="home.html">GO</a>-->
+
+<div>
+    <div id='sign-intro' show-if-fullscreen=false>
+        <p>You now need to provide us with your signature using the graphic tablet and pen provided:</p>
+        <p>When you click the 'Do Signature' button below the screen will ...</p>
+        <p>Tips:</p>
+        <ul>
+            <li>Hold the pen slightly above the tablet before signing</li>
+            <li>You may find it easier to just look at the pad when signing</li>
+            <li>You will be given as many tries as you need</li>
+            <li>When you have finished signing, press the ENTER key on your keyboard</li>
+        </ul>
+        <p>Click the button below when you are ready to sign.</p>
+        <button ngsf-toggle-fullscreen ng-click='' onClick="javascript:stage2();">Enter signature now</button>
+    </div>
+    <div id='sign-perform' show-if-fullscreen=true hidden="true">
+        <p>Please sign below, then press enter or click <button ngsf-toggle-fullscreen onClick='javascript:doIt();'>Finished</button></p>
+        <!--[if lt IE 9]-->
+	<script type="text/javascript" src="assets/flashcanvas.js"></script>
+	<!--[endif]-->
+	<script src="assets/jSignature.min.js"></script>
+	<div id="signature"></div>
+	<script>
+	    $(document).ready(function() {
+	        $("#signature").jSignature()
+	    })
+	</script>
+    </div>
+    <div id='sign-gallery' show-if-fullscreen=false hidden="true">
+        <p>Do you want to use this signature, or try again?</p>
+        <div id="tools"></div>
+        <div><div id="displayarea"></div></div>
+        <a href='index.html'>Try Again</a><button>Use this Signature</button>
+        <script>
+            function stage2() {
+                    $("#sign-intro").hide();
+                    $("#sign-perform").show();
+                    $("#sign-gallery").hide();
+            }
+            function stage3() {
+                    $("#sign-intro").hide();
+                    $("#sign-perform").hide();
+                    $("#sign-gallery").show();
+            }
+            function doIt() {
+            console.log("DO IT!!!!");
+            var $sigdiv = $("#signature");
+                    //$sigdiv.jSignature() // inits the jSignature widget.
+                    // after some doodling...
+                    //$sigdiv.jSignature("reset") // clears the canvas and rerenders the decor on it.
+
+                    // Getting signature as SVG and rendering the SVG within the browser. 
+                    // (!!! inline SVG rendering from IMG element does not work in all browsers !!!)
+                    // this export plugin returns an array of [mimetype, base64-encoded string of SVG of the signature strokes]
+                    var datapair = $sigdiv.jSignature("getData", "svgbase64") ;
+                    var i = new Image();
+                    i.src = "data:" + datapair[0] + "," + datapair[1] ;
+                    $(i).appendTo($("#displayarea")); // append the image (SVG) to DOM.
+                    
+                    $("#sign-intro").hide();
+                    $("#sign-perform").hide();
+                    $("#sign-gallery").show();
+
+                    // Getting signature as "base30" data pair
+                    // array of [mimetype, string of jSIgnature"s custom Base30-compressed format]
+                    //datapair = $sigdiv.jSignature("getData","base30") 
+                    // reimporting the data into jSignature.
+                    // import plugins understand data-url-formatted strings like "data:mime;encoding,data"
+                    //$sigdiv.jSignature("setData", "data:" + datapair.join(",")) 
+                }
+        </script>
+    </div>
+    
+
+        
+<!--    <div id="content">
+            <div id="signatureparent">
+                    <div>jSignature inherits colors from parent element. Text = Pen color. Background = Background. (This works even when Flash-based Canvas emulation is used.)</div>
+                    <div id="signature"></div></div>
+            <div id="tools"></div>
+            <div><p>Display Area:</p><div id="displayarea"></div></div>
+    </div>-->
+end
+</div>
+
+<!--    <page>
+
+        <div layout="page-header" class="myclass">
+            <h1>Monthly Message System</h1>
+        </div>
+
+        <div layout="page-header">
+            <panel heading="Add Alert">
+                <alert-add current-month="{{page.lastSelectedMonth}}"></alert-add>
+            </panel>
+        </div>
+
+        <div layout="page-sidebar">
+            multi: {{page.multiMode}}
+            <panel heading="Month picker">
+                <month-picker 
+                    multi="{{page.multiMode}}"
+                    selected="page.selectedMonths"
+                    last-selected="page.setLastSelectedMonth(month)">
+                </month-picker>
+                <input type="checkbox" ng-model="page.multiMode"/> multi mode
+            </panel>
+        </div>
+
+        <div layout="page-main">
+            <panel heading="Alerts">
+                <alert-list months="page.selectedMonths"></alert-list>
+            </panel>
+        </div>
+
+    </page>-->
+
+    
+    <script src="angular-screenfull.js"></script>
+    <script src="monthPicker.js"></script>
+    <script src="page.js"></script>
+    <script src="panel.js"></script>
+    <script src="alertList.js"></script>
+    <script src="alertAdd.js"></script>
+    <script src="pageController.js"></script>
+    <script src="alertService.js"></script>
+    <script src="app.module.js"></script>
+    <!--<![endif]-->
+</body>
+</html>
